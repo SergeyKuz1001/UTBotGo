@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: utbotgo
+        working-directory: examples/test1
     steps:
       - uses: actions/checkout@v2
-      - run: sudo sed -e "s/##utbotgo_dir/${PWD//\//\\\/}/" < utbotgo.sh > /usr/bin/utbotgo
-      - run: cd ../examples/test1; utbotgo init
+      - run: sed -e "s/##utbotgo_dir/${PWD//\//\\\/}/" < ../../utbotgo/utbotgo.sh > ../utbotgo; sudo chmod ugo+x ../utbotgo
+      - run: ../utbotgo init
