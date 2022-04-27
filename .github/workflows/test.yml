@@ -1,0 +1,15 @@
+name: Test
+on:
+  push:
+    branches: [test]
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: utbotgo
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo sed -e "s/##utbotgo_dir/${PWD//\//\\\/}/" < utbotgo.sh > /usr/bin/utbotgo
+      - run: cd ../examples/test1; utbotgo init
