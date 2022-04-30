@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: source .env
       - uses: mattdavis0351/actions/docker-gpr@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          image-name: hello-world
-          tag: 0.0
+          image-name: hello-world:${HELLO_WORLD_VERSION}
