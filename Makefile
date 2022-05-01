@@ -1,7 +1,8 @@
 include .env
 
-build: .docker_image
-
 .docker_image: Dockerfile .env
-	docker pull ghcr.io/sergeykuz1001/hello_world:0.0
+	docker pull $(HELLO_WORLD_DOCKER_IMAGE)
 	touch .docker_image
+
+run: .docker_image
+	docker run $(HELLO_WORLD_DOCKER_IMAGE)

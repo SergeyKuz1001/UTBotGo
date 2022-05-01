@@ -5,4 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: make .docker_image || (echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u sergeykuz1001 --password-stdin; docker build -t ghcr.io/sergeykuz1001/hello_world:0.0 .; docker push ghcr.io/sergeykuz1001/hello_world:0.0; make .docker_image); docker run ghcr.io/sergeykuz1001/hello_world:0.0
+      - run: ./build_docker_image.sh ${{ secrets.GITHUB_TOKEN }}
+      - run: make run
