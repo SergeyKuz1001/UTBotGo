@@ -5,5 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: source .env
-      - run: echo "${HELLO_WORLD_VERSION}"
+      - run: source .env; make .docker_image || (echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u SergeyKuz1001 --password-stdin; docker build -t ghcr.io/SergeyKuz1001/hello_world:$HELLO_WORLD_VERSION .; docker push ghcr.io/SergeyKuz1001/hello_world:$HELLO_WORLD_VERSION; make .docker_image); docker run ghcr.io/SergeyKuz1001/hello_world:$HELLO_WORLD_VERSION
